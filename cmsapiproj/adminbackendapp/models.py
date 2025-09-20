@@ -11,7 +11,7 @@ class Staff(models.Model):
     mobile_no = models.CharField(max_length=15, unique=True)
     dob = models.DateField()
     username = models.CharField(max_length=50, unique=True)
-    password = models.CharField(max_length=128)  # you can hash later
+    password = models.CharField(max_length=128)  
     role = models.CharField(
         max_length=20,
         choices=[

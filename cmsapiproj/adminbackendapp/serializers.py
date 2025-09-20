@@ -37,7 +37,7 @@ class DoctorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Doctor
-        fields = ['id', 'staff', 'staff_name', 'specialization', 'experience', 'consultation_fee', 'is_active']
+        fields = ['doctor_id', 'staff', 'staff_name', 'specialization', 'experience', 'consultation_fee', 'is_active']
 
     def validate(self, data):
         staff = data.get("staff")
