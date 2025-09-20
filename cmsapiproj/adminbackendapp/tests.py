@@ -69,9 +69,17 @@ class SpecializationAPITestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
 
+from django.urls import reverse
+from rest_framework.test import APIClient
+from rest_framework import status
+from django.test import TestCase
+from .models import Staff, Doctor, Specialization
+
 class DoctorAPITestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
+
+        # Valid doctor staff
         self.staff = Staff.objects.create(
             staff_name="Dr. Smith",
             username="drsmith",
@@ -82,9 +90,13 @@ class DoctorAPITestCase(TestCase):
             role="DOCTOR",
             is_active=True,
         )
+
+        # Specialization
         self.spec1 = Specialization.objects.create(
             specialization_name="Orthopedics"
         )
+
+        # Existing doctor
         self.doctor = Doctor.objects.create(
             staff=self.staff,
             specialization=self.spec1,
@@ -119,8 +131,33 @@ class DoctorAPITestCase(TestCase):
             "is_active": True,
         }
         response = self.client.post(url, data, format="json")
-        print("Create doctor response:", response.data)  # Debugging line
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_create_doctor_with_non_doctor_staff_should_fail(self):
+        # Create a staff with wrong role
+        invalid_staff = Staff.objects.create(
+            staff_name="Receptionist User",
+            username="recept1",
+            password="testpass123",
+            gender="Female",
+            mobile_no="9998887777",
+            dob="1995-05-05",
+            role="RECEPTIONIST",   # ❌ Not a doctor
+            is_active=True,
+        )
+        url = reverse("doctor-list")
+        data = {
+            "staff": invalid_staff.staff_id,
+            "specialization": self.spec1.specialization_id,
+            "experience": 2,
+            "consultation_fee": "200.00",
+            "is_active": True,
+        }
+        response = self.client.post(url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        # Correct way to check the error
+        self.assertIn("Selected staff must have role 'DOCTOR'.", str(response.data['staff'][0]))
+
 
     def test_search_doctor_by_specialization(self):
         url = reverse("doctor-list")

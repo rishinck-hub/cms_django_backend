@@ -57,3 +57,7 @@ class DoctorSerializer(serializers.ModelSerializer):
         if value <= 0:
             raise serializers.ValidationError("Consultation fee must be greater than 0.")
         return value
+    def validate_staff(self, staff):
+        if staff.role != "DOCTOR":
+            raise serializers.ValidationError("Selected staff must have role 'DOCTOR'.")
+        return staff
