@@ -39,37 +39,27 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    # 'authapp',  # Our new auth app
+    'authentication', 
     'adminbackendapp',
     # 'receptionistbackendapp',
     # 'doctorbackendapp',
     # 'pharmacistbackendapp',
-    # 'rest_framework_simplejwt',
+    'rest_framework_simplejwt',
 ]
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_PERMISSION_CLASSES': (
-#         'rest_framework.permissions.IsAuthenticated',
-#     ),
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         'rest_framework_simplejwt.authentication.JWTAuthentication',
-#     ),
-# }
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticated",
+    ),
+}
 
-# SIMPLE_JWT = {
-#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
-#     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-#     'ROTATE_REFRESH_TOKENS': True,
-#     'BLACKLIST_AFTER_ROTATION': True,
-#     'ALGORITHM': 'HS256',
-#     'SIGNING_KEY': SECRET_KEY,
-#     'VERIFYING_KEY': None,
-#     'AUTH_HEADER_TYPES': ('Bearer',),
-#     'USER_ID_FIELD': 'id',
-#     'USER_ID_CLAIM': 'user_id',
-#     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
-#     'TOKEN_TYPE_CLAIM': 'token_type',
-# }
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -158,4 +148,4 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# AUTH_USER_MODEL = 'authapp.User'
+# AUTH_USER_MODEL = 'adminbackendapp.Staff'

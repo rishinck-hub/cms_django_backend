@@ -4,7 +4,7 @@ from .models import Staff, Doctor, Specialization
 
 @admin.register(Staff)
 class StaffAdmin(admin.ModelAdmin):
-    list_display = ('staff_id', 'staff_name', 'gender', 'mobile_no', 'dob', 'username','password','role')
+    list_display = ('staff_id', 'staff_name', 'gender', 'mobile_no','dob','email','address','hire_date','role')
     search_fields = ('staff_name', 'mobile_no','staff_id')
 
     def user_role(self, obj):

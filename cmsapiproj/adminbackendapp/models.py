@@ -10,9 +10,10 @@ class Staff(models.Model):
         choices=[('Male', 'Male'), ('Female', 'Female'), ('Other', 'Other')],
     )
     mobile_no = models.CharField(max_length=15, unique=True)
+    email = models.EmailField(unique=True,null=False,blank=False)
+    address = models.TextField(max_length=500)
     dob = models.DateField()
-    username = models.CharField(max_length=50, unique=True)
-    password = models.CharField(max_length=128)  
+    hire_date = models.DateField(auto_now_add=True) 
     role = models.CharField(
         max_length=20,
         choices=[

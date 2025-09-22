@@ -23,9 +23,10 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 urlpatterns = [
     # Django Admin
     path('admin/', admin.site.urls),
-    
+    # path("api/auth/", include("authapp.urls")),
+   
     # # API Authentication
-    # path('api/auth/', include('authapp.urls')),
+    path('api/auth/', include('authentication.urls')),
     
     # Admin Backend API
     path('api/admin/', include('adminbackendapp.urls')),
