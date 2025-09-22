@@ -30,6 +30,9 @@ urlpatterns = [
     
     # Admin Backend API
     path('api/admin/', include('adminbackendapp.urls')),
+    path('api/receptionist/', include('receptionistbackendapp.urls')),
+    path('api/doctor/', include('doctorbackendapp.urls')),
+    path('api/pharmacist/', include('pharmacistbackendapp.urls')),
     
     # # Token URLs
     # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'authentication', 
     'adminbackendapp',
-    # 'receptionistbackendapp',
-    # 'doctorbackendapp',
-    # 'pharmacistbackendapp',
+    'receptionistbackendapp',
+    'doctorbackendapp',
+    'pharmacistbackendapp',
     'rest_framework_simplejwt',
 ]
 
@@ -97,7 +97,7 @@ WSGI_APPLICATION = 'cmsapiproj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cms_api_25',
+        'NAME': 'cms_api',
         'USER' : 'root',
         "PASSWORD" : 'faith',
         "HOST" : 'localhost',
